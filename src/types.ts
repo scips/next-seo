@@ -217,6 +217,23 @@ export type Publisher = {
   name: string;
 };
 
+export type ArticlePublisherLogo = {
+  type: string;
+  url: string;
+};
+
+export type ArticleAuthor = {
+  type: string;
+  name: string;
+  url: string;
+};
+
+export type ArticlePublisher = {
+  type: string;
+  name: string;
+  logo: ArticlePublisherLogo;
+};
+
 export type ApplicationCategory =
   | 'Game'
   | 'SocialNetworking'

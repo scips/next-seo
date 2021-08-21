@@ -33,6 +33,7 @@ describe('Validates JSON-LD For:', () => {
     cy.get('head script[type="application/ld+json"]')
       .should('have.length', expectedJSONResults)
       .then(tags => {
+        console.log(tags[articleLdJsonIndex].innerHTML);
         const jsonLD = JSON.parse(tags[articleLdJsonIndex].innerHTML);
         assertSchema(schemas)('Article', '1.0.0')(jsonLD);
       });
@@ -63,10 +64,17 @@ describe('Validates JSON-LD For:', () => {
             {
               '@type': 'Person',
               name: 'Jane Blogs',
+              url: 'http://example.com/profile/janeblogs123',
             },
             {
               '@type': 'Person',
               name: 'Mary Stone',
+              url: 'http://example.com/profile/marystone123',
+            },
+            {
+              '@type': 'Organization',
+              name: 'Alphabet',
+              url: 'http://example.com/organization/alphabet123',
             },
           ],
           publisher: {

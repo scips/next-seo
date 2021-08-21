@@ -37,6 +37,23 @@ const JsonLD = () => (
       ]}
       datePublished="2015-02-05T08:00:00+08:00"
       dateModified="2015-02-05T09:00:00+08:00"
+      authors={[
+        {
+          type: 'Person',
+          name: 'Jane Blogs',
+          url: 'http://example.com/profile/janeblogs123',
+        },
+        {
+          type: 'Person',
+          name: 'Mary Stone',
+          url: 'http://example.com/profile/marystone123',
+        },
+        {
+          type: 'Organization',
+          name: 'Alphabet',
+          url: 'http://example.com/organization/alphabet123',
+        },
+      ]}
       authorName={['Jane Blogs', 'Mary Stone']}
       publisherName="Gary Meehan"
       publisherLogo="https://www.example.com/photos/logo.jpg"

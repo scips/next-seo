@@ -3,6 +3,8 @@ import Head from 'next/head';
 
 import markup from '../utils/markup';
 import formatAuthorName from '../utils/formatAuthorName';
+import { buildArticleAuthor } from '../utils/buildArticle';
+import { ArticleAuthor, ArticlePublisher } from 'src/types';
 
 export interface ArticleJsonLdProps {
   keyOverride?: string;
@@ -11,6 +13,8 @@ export interface ArticleJsonLdProps {
   images: ReadonlyArray<string>;
   datePublished: string;
   dateModified?: string;
+  authors: ArticleAuthor | ArticleAuthor[];
+  publisher: ArticlePublisher;
   authorName: string | string[];
   description: string;
   publisherName: string;
@@ -24,6 +28,7 @@ const ArticleJsonLd: FC<ArticleJsonLdProps> = ({
   images = [],
   datePublished,
   dateModified = null,
+  authors,
   authorName,
   description,
   publisherName,
@@ -42,7 +47,18 @@ const ArticleJsonLd: FC<ArticleJsonLdProps> = ({
      ],
     "datePublished": "${datePublished}",
     "dateModified": "${dateModified || datePublished}",
-    "author": ${formatAuthorName(authorName)},
+    ${
+      authors
+        ? `"author": ${
+            Array.isArray(authors)
+              ? `[${authors.map(author => `${buildArticleAuthor(author)}`)}]`
+              : buildArticleAuthor(authors)
+          },`
+        : ''
+    }
+    ${
+      authorName && !authors ? `"author": ${formatAuthorName(authorName)},` : ''
+    }
     "publisher": {
       "@type": "Organization",
       "name": "${publisherName}",
